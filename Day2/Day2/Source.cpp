@@ -72,7 +72,7 @@ std::string part_two(const std::vector<std::string>& data)
 				{
 					if (error_index == -1) error_index = k; // value -1 means that no error was found yet
 					else {
-						error_index = -2; // value -2 means that more than two errors were found
+						error_index = -2; // value -2 means that more than one errors were found
 						break;
 					}
 				}
