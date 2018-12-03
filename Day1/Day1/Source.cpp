@@ -4,7 +4,6 @@
 #include <vector>
 #include <unordered_set>
 #include <algorithm>
-#include <ctime>
 
 int part_one(const std::vector<int>&);
 int part_two(const std::vector<int>&);
@@ -21,11 +20,7 @@ int main()
 	input_file.close();
 
 	std::cout << "Part One:: " << part_one(data) << "\n";
-
-	clock_t begin = clock();
-	std::cout << "\nPart Two:: " << part_two(data) << "\n";
-	clock_t end = clock();
-	std::cout << double(end - begin) / CLOCKS_PER_SEC << "\n";
+	std::cout << "Part Two:: " << part_two(data) << "\n";
 
 	system("pause");
 	return 0;
@@ -52,7 +47,7 @@ int part_two(const std::vector<int> &data)
 		for (auto const &x : data) {
 			if (previous_frequencies.insert(frequency += x).second == false)
 			{
-				std::cout << "\nSIZE: " << previous_frequencies.size() << " LOOPS: " << i << "\n";
+				std::cout << "Number of frequencies: " << previous_frequencies.size() << " Loops: " << i << "\n";
 				return frequency;
 			}
 		}
