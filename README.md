@@ -6,4 +6,4 @@ The aim for the solutions is to be efficient and readable, feedback is welcome!
 
 - **Day 1: [Chronal Calibration](Day1/Day1/Source.cpp)**
 - **Day 2: [Inventory Management System](Day2/Day2/Source.cpp)**
-- **Day 3: [No Matter How You Slice It]**
+- **Day 3: [No Matter How You Slice It](Day3/Day3/Source.cpp)**
