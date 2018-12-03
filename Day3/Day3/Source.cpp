@@ -14,8 +14,9 @@ struct FabricClaim
 
 int main()
 {
-	std::ifstream input_file("input.txt");
 	std::vector<FabricClaim> claims_;
+
+	std::ifstream input_file("input.txt");
 	if (input_file.is_open()) {
 		for (std::string str; std::getline(input_file, str); ) 
 		{
