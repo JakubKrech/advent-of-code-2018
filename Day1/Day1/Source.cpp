@@ -19,8 +19,8 @@ int main()
 	}
 	input_file.close();
 
-	std::cout << "Part One:: " << part_one(data) << "\n";
-	std::cout << "Part Two:: " << part_two(data) << "\n";
+	std::cout << "Part One: " << part_one(data) << "\n";
+	std::cout << "Part Two: " << part_two(data) << "\n";
 
 	system("pause");
 	return 0;
