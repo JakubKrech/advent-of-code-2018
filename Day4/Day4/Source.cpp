@@ -92,7 +92,8 @@ int main()
 				j += 2;
 			}
 
-			int key = stoi(events_[i].action.substr(events_[i].action.find("#") + 1, events_[i].action.find("b") - 2 - events_[i].action.find("#")));
+			int key = stoi(events_[i].action.substr(events_[i].action.find("#") + 1,
+				events_[i].action.find("b") - 2 - events_[i].action.find("#")));
 			bool found = false;
 
 			if (guards_.size() == 0) guards_.push_back(Guard{ key, minute_portions, total_time_asleep });
