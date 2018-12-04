@@ -7,4 +7,4 @@ The aim for the solutions is to be efficient and easily readable. Most of them w
 - **Day 1: [Chronal Calibration](Day1/Day1/Source.cpp)**
 - **Day 2: [Inventory Management System](Day2/Day2/Source.cpp)**
 - **Day 3: [No Matter How You Slice It](Day3/Day3/Source.cpp)**
-- **Day 4: [Day 4: Repose Record](Day4/Day4/Source.cpp)**
+- **Day 4: [Repose Record](Day4/Day4/Source.cpp)**
