@@ -1,7 +1,7 @@
 # Advent of Code 2018 :christmas_tree:
 
 ### Here are my C++ solutions for [AoC 2018](https://adventofcode.com/) - programming puzzles created by [Eric Wastl](http://was.tl/).
-The aim for the solutions is to be efficient and easily readable. Most of them will be included in individual source files, since they are small programs and splitting them into many files would be source of unnecessary mess. Feedback is welcome!
+The aim for the solutions is to be reasonably efficient and easily readable. Most of them will be included in individual source files, since they are small programs and splitting them into many files would be source of unnecessary mess. Feedback is welcome!
 
 
 - **Day 1: [Chronal Calibration](Day1/Day1/Source.cpp)**
