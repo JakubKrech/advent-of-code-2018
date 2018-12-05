@@ -12,16 +12,16 @@ int main()
 	std::string polymer;
 
 	get_input_from_file("input.txt", polymer);
-
+	
 	std::cout << "Part One: " << react_polymer(polymer) << " units remain after fully reacting the polymer\n"; 
-
+	
 	int type_causing_problem;
 	int polymer_length_after_problem_removal = polymer.length();
 
 	detect_problem_causing_type(polymer, type_causing_problem, polymer_length_after_problem_removal);
 
 	std::cout << "Part Two: we can produce shortest polymer of length " << polymer_length_after_problem_removal << " by removing type " << char(type_causing_problem) << "\n\n";
-	
+
 	system("pause");
 	return 0;
 }
@@ -31,7 +31,7 @@ int react_polymer(std::string& polymer)
 	for (int i = 0; (i + 1) < polymer.length();) {
 		if (int(polymer[i]) - int(polymer[i + 1]) == 32 || (int(polymer[i]) - int(polymer[i + 1]) == -32)) {
 			polymer.erase(i, 2);
-			i = 0;
+			if (i > 0) i--;
 		}
 		else i++;
 	}
