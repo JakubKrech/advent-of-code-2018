@@ -8,3 +8,4 @@ The aim for the solutions is to be reasonably efficient and easily readable. Mos
 - **Day 2: [Inventory Management System](Day2/Day2/Source.cpp)**
 - **Day 3: [No Matter How You Slice It](Day3/Day3/Source.cpp)**
 - **Day 4: [Repose Record](Day4/Day4/Source.cpp)**
+- **Day 5: [Alchemical Reduction](Day5/Day5/Source.cpp)**
