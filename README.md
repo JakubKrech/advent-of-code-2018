@@ -10,3 +10,4 @@ The aim for the solutions is to be reasonably efficient and easily readable. Mos
 - **Day 4: [Repose Record](Day4/Day4/Source.cpp)**
 - **Day 5: [Alchemical Reduction](Day5/Day5/Source.cpp)**
 - **Day 6: [Chronal Coordinates](Day6/Day6/Source.cpp)**
+- **Day 7: [The Sum of Its Parts](Day7/Day7/Source.cpp)**
