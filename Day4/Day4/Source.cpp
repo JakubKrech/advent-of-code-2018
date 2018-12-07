@@ -16,11 +16,6 @@ struct Guard
 	std::vector<int> minute_portions;
 	int total_time_asleep;
 
-	bool operator==(const Guard& g)
-	{
-		return id = g.id;
-	}
-
 	void operator+=(const Guard& g)
 	{
 		total_time_asleep += g.total_time_asleep;
