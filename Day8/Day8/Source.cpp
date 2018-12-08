@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <algorithm>  
 
 std::vector<int> get_input_from_file(std::string);
 
