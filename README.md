@@ -12,3 +12,4 @@ The aim for the solutions is to be reasonably efficient and easily readable. Mos
 - **Day 6: [Chronal Coordinates](Day6/Day6/Source.cpp)**
 - **Day 7: [The Sum of Its Parts](Day7/Day7/Source.cpp)**
 - **Day 8: [Memory Maneuver](Day8/Day8/Source.cpp)**
+- **Day 9: [Marble Mania](Day9/Day9/Source.cpp)**
