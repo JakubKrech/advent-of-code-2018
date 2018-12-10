@@ -13,3 +13,4 @@ The aim for the solutions is to be reasonably efficient and easily readable. Mos
 - **Day 7: [The Sum of Its Parts](Day7/Day7/Source.cpp)**
 - **Day 8: [Memory Maneuver](Day8/Day8/Source.cpp)**
 - **Day 9: [Marble Mania](Day9/Day9/Source.cpp)**
+- **Day 10: [The Stars Align](Day10/Day10/Source.cpp)**
