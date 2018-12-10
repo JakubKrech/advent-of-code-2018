@@ -76,8 +76,6 @@ long long find_winning_player_score(int number_of_players, int final_marble_valu
 
 void get_input_from_file(std::string file_name, int& number_of_players, int& final_marble_value)
 {
-	std::vector<int> data;
-
 	std::ifstream input_file(file_name);
 	if (input_file.is_open()) {
 		for (std::string str; std::getline(input_file, str); )
