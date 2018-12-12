@@ -15,3 +15,4 @@ The aim for the solutions is to be reasonably efficient and easily readable. Mos
 - **Day 9: [Marble Mania](Day9/Day9/Source.cpp)**
 - **Day 10: [The Stars Align](Day10/Day10/Source.cpp)**
 - **Day 11: [Chronal Charge](Day11/Day11/Source.cpp)**
+- **Day 12: [Subterranean Sustainability](Day12/Day12/Source.cpp)**
