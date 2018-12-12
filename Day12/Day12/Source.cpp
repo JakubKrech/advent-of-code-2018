@@ -28,9 +28,10 @@ int main()
 
 	int previous_counter = 0;
 	produce_next_pots_generations(pots_, combinations_, 2000, previous_counter);
-	//optimizing this algorithm for 50000000000 would be hard task, luckily after analyzing some inputs it becomes clear that there is a pattern
-	//after certain number or generations difference in results for every next generation becomes constant and equals (for my input data) 88
-	//using that knowledge we can calculate final result by multiplying number of remaining generations by 88
+	// optimizing this algorithm for 50000000000 would be hard task, luckily after analyzing some inputs
+	// it becomes clear that there is a pattern after certain number or generations difference in results
+	// for every next generation becomes constant and equals (for my input data) 88
+	// using that knowledge we can calculate final result by multiplying number of remaining generations by 88
 
 	std::cout << "\n\n";
 	for (auto x : pots_) {
@@ -48,7 +49,8 @@ int main()
 	return 0;
 }
 
-void produce_next_pots_generations(std::list<Pot>& pots_, const std::vector<Combination>& combinations_, long long generations, int& previous_counter)
+void produce_next_pots_generations(std::list<Pot>& pots_, const std::vector<Combination>& combinations_, 
+	long long generations, int& previous_counter)
 {
 	for (long long i = 1; i <= generations; i++) {
 		while (pots_.begin()->contain_plant == true ||
@@ -98,7 +100,8 @@ void produce_next_pots_generations(std::list<Pot>& pots_, const std::vector<Comb
 		for (auto x : pots_)
 			if (x.contain_plant == 1) id_sum_of_plant_cont_pots += x.id;
 
-		std::cout << "#" << i << " Sum: " << id_sum_of_plant_cont_pots << "  diff: " << id_sum_of_plant_cont_pots - previous_counter << "\n";
+		std::cout << "#" << i << " Sum: " << id_sum_of_plant_cont_pots << "  diff: " 
+			<< id_sum_of_plant_cont_pots - previous_counter << "\n";
 		previous_counter = id_sum_of_plant_cont_pots;
 	}
 }
@@ -109,7 +112,8 @@ void get_input_from_file(std::string file_name, std::list<Pot>& pots_, std::vect
 	if (input_file.is_open()) {
 		std::string initial_state_line;
 		std::getline(input_file, initial_state_line);
-		std::string initial_state = initial_state_line.substr(initial_state_line.find(":") + 2, initial_state_line.length() - initial_state_line.find(":") + 2);
+		std::string initial_state = initial_state_line.substr(initial_state_line.find(":") + 2,
+			initial_state_line.length() - initial_state_line.find(":") + 2);
 		std::cout << initial_state << "\n";
 		
 		for (int i = 0; i < initial_state.length(); i++) {
