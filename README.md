@@ -17,3 +17,4 @@ The aim for the solutions is to be reasonably efficient and easily readable. Mos
 - **Day 11: [Chronal Charge](Day11/Day11/Source.cpp)**
 - **Day 12: [Subterranean Sustainability](Day12/Day12/Source.cpp)**
 - **Day 13: [Mine Cart Madness](Day13/Day13/Source.cpp)**
+- **Day 14: [Chocolate Charts](Day14/Day14/Source.cpp)**
