@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <sstream>
+#include <iomanip>
 
 typedef std::vector<int> func(const std::vector<int>&, int, int, int, int);
 typedef func* pfunc;
@@ -47,6 +48,8 @@ int main()
 	get_input_from_file("input.txt", samples_);
 	std::vector<pfunc> functions{ addr ,addi , mulr, muli, banr, bani, borr, bori, setr, seti, gtir, gtri, gtrr, eqir, eqri, eqrr };
 
+	std::cout << "SAMPLES SIZE: " << samples_.size() << "\n";
+
 	/*for (auto x : samples_) {
 		std::cout << x.before[0] << " " << x.before[1] << " " << x.before[2] << " " << x.before[3] << " \n";
 		std::cout << x.instruction[0] << " " << x.instruction[1] << " " << x.instruction[2] << " " << x.instruction[3] << " \n";
@@ -55,6 +58,7 @@ int main()
 	}*/
 
 	int samples_behaving_correctly = 0;
+
 	for (auto x : samples_) {
 		int correct_behaviour_counter = 0;
 
@@ -68,9 +72,33 @@ int main()
 
 		if (correct_behaviour_counter >= 3) samples_behaving_correctly++;
 	}
+	std::cout << "Samples behaving like 3 or more opcodes: " << samples_behaving_correctly << "\n\n";
 
-	std::cout << "Samples behaving correctly: " << samples_behaving_correctly << "\n";
 
+	std::cout << "     ";
+	for (int i = 0; i < 16; i++) {
+		std::cout << std::setw(2) << i << " ";
+	}
+	std::cout << "\n";
+
+	for (int z = 0; z < functions.size(); z++) {
+		std::vector<int> counters(16, 0);
+		for (auto x : samples_) {
+			std::vector<int> result = functions[z](x.before, x.instruction[0], x.instruction[1], x.instruction[2], x.instruction[3]);
+
+			if (result[0] == x.after[0] && result[1] == x.after[1] && result[2] == x.after[2] && result[3] == x.after[3])
+				counters[x.instruction[0]]++;
+		}
+
+		int function_id = -1;
+		std::cout << "#" << std::setw(2) << z << "  ";
+		for (auto c : counters) {
+			std::cout << std::setw(2) << c << " ";
+		}
+		std::cout << "\n";
+	}
+
+	std::cout << "\n";
 	system("pause");
 	return 0;
 }
