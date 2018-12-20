@@ -6,41 +6,31 @@
 #include <iomanip>
 #include <map>
 
-#include <chrono>
-#include <thread>
-
-typedef std::vector<int> func(const std::vector<int>&, int, int, int, int);
+typedef void func(std::vector<int>&, int, int, int, int);
 typedef func* pfunc;
 
-struct Sample
-{
-	std::vector<int> before;
-	std::vector<int> instruction;
-	std::vector<int> after;
-};
+void addr(std::vector<int>&, int, int, int, int);
+void addi(std::vector<int>&, int, int, int, int);
 
-std::vector<int> addr(const std::vector<int>&, int, int, int, int);
-std::vector<int> addi(const std::vector<int>&, int, int, int, int);
+void mulr(std::vector<int>&, int, int, int, int);
+void muli(std::vector<int>&, int, int, int, int);
 
-std::vector<int> mulr(const std::vector<int>&, int, int, int, int);
-std::vector<int> muli(const std::vector<int>&, int, int, int, int);
+void banr(std::vector<int>&, int, int, int, int);
+void bani(std::vector<int>&, int, int, int, int);
 
-std::vector<int> banr(const std::vector<int>&, int, int, int, int);
-std::vector<int> bani(const std::vector<int>&, int, int, int, int);
+void borr(std::vector<int>&, int, int, int, int);
+void bori(std::vector<int>&, int, int, int, int);
 
-std::vector<int> borr(const std::vector<int>&, int, int, int, int);
-std::vector<int> bori(const std::vector<int>&, int, int, int, int);
+void setr(std::vector<int>&, int, int, int, int);
+void seti(std::vector<int>&, int, int, int, int);
 
-std::vector<int> setr(const std::vector<int>&, int, int, int, int);
-std::vector<int> seti(const std::vector<int>&, int, int, int, int);
+void gtir(std::vector<int>&, int, int, int, int);
+void gtri(std::vector<int>&, int, int, int, int);
+void gtrr(std::vector<int>&, int, int, int, int);
 
-std::vector<int> gtir(const std::vector<int>&, int, int, int, int);
-std::vector<int> gtri(const std::vector<int>&, int, int, int, int);
-std::vector<int> gtrr(const std::vector<int>&, int, int, int, int);
-
-std::vector<int> eqir(const std::vector<int>&, int, int, int, int);
-std::vector<int> eqri(const std::vector<int>&, int, int, int, int);
-std::vector<int> eqrr(const std::vector<int>&, int, int, int, int);
+void eqir(std::vector<int>&, int, int, int, int);
+void eqri(std::vector<int>&, int, int, int, int);
+void eqrr(std::vector<int>&, int, int, int, int);
 
 void get_input_from_file(std::string file_name, std::vector<std::pair<std::string, std::vector<int>>>&, int&);
 
@@ -56,20 +46,40 @@ int main()
 													{ "gtrr",gtrr },{ "seti",seti },{ "gtri",gtri },{ "eqri",eqri },
 													{ "addi",addi },{ "borr",borr },{ "eqir",eqir },{ "addr",addr } };
 
-	std::vector<int> initial_data = { 0,0,0,0,0,0 };
+	std::vector<int> initial_data = { 0,0,0,0,0,0 }; // Part 1
+	//std::vector<int> initial_data = { 1,0,0,0,0,0 }; // Part 2
 	int instruction_pointer = 0;
 	while (instruction_pointer < data.size()) {
 		initial_data[instruction_pointer_register] = instruction_pointer;
 		
-		initial_data = functions_by_name[data[initial_data[instruction_pointer_register]].first](initial_data, 0, data[initial_data[instruction_pointer_register]].second[1],
+		functions_by_name[data[initial_data[instruction_pointer_register]].first](initial_data, 0, data[initial_data[instruction_pointer_register]].second[1],
 			data[initial_data[instruction_pointer_register]].second[2], data[initial_data[instruction_pointer_register]].second[3]);
 
 		instruction_pointer = initial_data[instruction_pointer_register];
+		
 		instruction_pointer++;
 	}
 
-	std::cout << initial_data[0] << " " << initial_data[1] << " " << initial_data[2] << " " << initial_data[3]
-		<< " " << initial_data[4] << " " << initial_data[5] << "\n";
+	std::cout << "Part 1:  Registers values: " << initial_data[0] << " " << initial_data[1] << " " << initial_data[2] << " " << initial_data[3]
+		<< " " << initial_data[4] << " " << initial_data[5] << "\n\n";
+	std::cout << "Part 1:  Register[0] = " << initial_data[0] << "\n\n";
+
+	// After analyzing Part Two it noticeable, that it would require 10551319*10551319 iterations of registers 2-10
+	// to solve the puzzle with previous approach. It's a little to much work, so after some additional analyze,
+	// i came up with shorter solution. It cuts most of iterations that would not affect the final result.
+
+	int r0 = 0;
+	int r1;
+	for (int r4 = 0; r4 <= 10551319; r4++)
+	{
+		for (int r5 = 0; r5 <= 10551319; r5++)
+		{
+			if (r4*r5 == 10551319) r0 += r4;
+			else if (r4*r5 > 10551319) break;
+		}
+	}
+
+	std::cout << "Part 2:  Register[0] = " << r0 << "\n\n";
 
 	system("pause");
 	return 0;
@@ -101,117 +111,63 @@ void get_input_from_file(std::string file_name, std::vector<std::pair<std::strin
 	input_file.close();
 }
 
-std::vector<int> addr(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-	result[output] = regs[input_A] + regs[input_B];
-
-	return result;
+void addr(std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	regs[output] = regs[input_A] + regs[input_B];
 }
-std::vector<int> addi(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-	result[output] = regs[input_A] + input_B;
-
-	return result;
+void addi(std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	regs[output] = regs[input_A] + input_B;
 }
 
-std::vector<int> mulr(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-	result[output] = regs[input_A] * regs[input_B];
-
-	return result;
+void mulr( std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	regs[output] = regs[input_A] * regs[input_B];
 }
-std::vector<int> muli(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-	result[output] = regs[input_A] * input_B;
-
-	return result;
+void muli(std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	regs[output] = regs[input_A] * input_B;
 }
 
-std::vector<int> banr(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-	result[output] = regs[input_A] & regs[input_B];
-
-	return result;
+void banr(std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	regs[output] = regs[input_A] & regs[input_B];
 }
-std::vector<int> bani(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-	result[output] = regs[input_A] & input_B;
-
-	return result;
+void bani(std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	regs[output] = regs[input_A] & input_B;
 }
 
-std::vector<int> borr(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-	result[output] = regs[input_A] | regs[input_B];
-
-	return result;
+void borr(std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	regs[output] = regs[input_A] | regs[input_B];
 }
-std::vector<int> bori(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-	result[output] = regs[input_A] | input_B;
-
-	return result;
+void bori(std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	regs[output] = regs[input_A] | input_B;
 }
 
-std::vector<int> setr(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-	result[output] = regs[input_A];
-
-	return result;
+void setr(std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	regs[output] = regs[input_A];
 }
-std::vector<int> seti(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-	result[output] = input_A;
-
-	return result;
+void seti(std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	regs[output] = input_A;
 }
 
-std::vector<int> gtir(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-
-	if (input_A > regs[input_B]) result[output] = 1;
-	else result[output] = 0;
-
-	return result;
+void gtir(std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	if (input_A > regs[input_B]) regs[output] = 1;
+	else regs[output] = 0;
 }
-std::vector<int> gtri(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-
-	if (regs[input_A] > input_B) result[output] = 1;
-	else result[output] = 0;
-
-	return result;
+void gtri(std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	if (regs[input_A] > input_B) regs[output] = 1;
+	else regs[output] = 0;
 }
-std::vector<int> gtrr(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-
-	if (regs[input_A] > regs[input_B]) result[output] = 1;
-	else result[output] = 0;
-
-	return result;
+void gtrr(std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	if (regs[input_A] > regs[input_B]) regs[output] = 1;
+	else regs[output] = 0;
 }
 
-std::vector<int> eqir(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-
-	if (input_A == regs[input_B]) result[output] = 1;
-	else result[output] = 0;
-
-	return result;
+void eqir(std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	if (input_A == regs[input_B]) regs[output] = 1;
+	else regs[output] = 0;
 }
-std::vector<int> eqri(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-
-	if (regs[input_A] == input_B) result[output] = 1;
-	else result[output] = 0;
-
-	return result;
+void eqri(std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	if (regs[input_A] == input_B) regs[output] = 1;
+	else regs[output] = 0;
 }
-std::vector<int> eqrr(const std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
-	std::vector<int> result = regs;
-
-	if (regs[input_A] == regs[input_B]) result[output] = 1;
-	else result[output] = 0;
-
-	return result;
+void eqrr(std::vector<int>& regs, int opcode, int input_A, int input_B, int output) {
+	if (regs[input_A] == regs[input_B]) regs[output] = 1;
+	else regs[output] = 0;
 }
