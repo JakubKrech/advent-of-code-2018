@@ -69,8 +69,8 @@ int main()
 		" " << initial_data[4] << " " << initial_data[5] << "\n\n";
 	std::cout << "Part 1:  Register[0] = " << initial_data[0] << "\n\n";
 
-	// After analyzing Part Two it noticeable, that it would require 10551319*10551319 iterations of registers 2-10
-	// to solve the puzzle with previous approach. It's a little to much work, so after some additional analyze,
+	// Part Two would require 10551320*10551320 iterations of registers 2-10 to solve the puzzle
+	// with previous approach. It's a little too much work, so after some additional examination,
 	// i came up with shorter solution. It cuts most of iterations that would not affect the final result.
 
 	int r0 = 0;
