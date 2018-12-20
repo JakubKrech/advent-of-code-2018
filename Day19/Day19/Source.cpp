@@ -40,11 +40,13 @@ int main()
 	int instruction_pointer_register;
 	get_input_from_file("input.txt", data, instruction_pointer_register);
 
-	std::vector<pfunc> functions_sorted_by_opcode{ bani, banr, muli, setr, bori, eqrr, gtir, mulr, gtrr, seti, gtri, eqri, addi, borr, eqir, addr };
-	std::map<std::string, pfunc> functions_by_name{ { "bani",bani },{ "banr",banr },{ "muli",muli },{ "setr",setr },
-													{ "bori",bori },{ "eqrr",eqrr },{ "gtir",gtir },{ "mulr",mulr },
-													{ "gtrr",gtrr },{ "seti",seti },{ "gtri",gtri },{ "eqri",eqri },
-													{ "addi",addi },{ "borr",borr },{ "eqir",eqir },{ "addr",addr } };
+	std::vector<pfunc> functions_sorted_by_opcode{ bani, banr, muli, setr, bori, eqrr, gtir, mulr,
+		gtrr, seti, gtri, eqri, addi, borr, eqir, addr };
+	std::map<std::string, pfunc> functions_by_name{
+		{ "bani",bani },{ "banr",banr },{ "muli",muli },{ "setr",setr },
+		{ "bori",bori },{ "eqrr",eqrr },{ "gtir",gtir },{ "mulr",mulr },
+		{ "gtrr",gtrr },{ "seti",seti },{ "gtri",gtri },{ "eqri",eqri },
+		{ "addi",addi },{ "borr",borr },{ "eqir",eqir },{ "addr",addr } };
 
 	std::vector<int> initial_data = { 0,0,0,0,0,0 }; // Part 1
 	//std::vector<int> initial_data = { 1,0,0,0,0,0 }; // Part 2
@@ -52,16 +54,19 @@ int main()
 	while (instruction_pointer < data.size()) {
 		initial_data[instruction_pointer_register] = instruction_pointer;
 		
-		functions_by_name[data[initial_data[instruction_pointer_register]].first](initial_data, 0, data[initial_data[instruction_pointer_register]].second[1],
-			data[initial_data[instruction_pointer_register]].second[2], data[initial_data[instruction_pointer_register]].second[3]);
+		functions_by_name[data[initial_data[instruction_pointer_register]].first](
+			initial_data, 0, data[initial_data[instruction_pointer_register]].second[1],
+			data[initial_data[instruction_pointer_register]].second[2],
+			data[initial_data[instruction_pointer_register]].second[3]);
 
 		instruction_pointer = initial_data[instruction_pointer_register];
 		
 		instruction_pointer++;
 	}
 
-	std::cout << "Part 1:  Registers values: " << initial_data[0] << " " << initial_data[1] << " " << initial_data[2] << " " << initial_data[3]
-		<< " " << initial_data[4] << " " << initial_data[5] << "\n\n";
+	std::cout << "Part 1:  Registers values: " << initial_data[0] << " " << initial_data[1] <<
+		" " << initial_data[2] << " " << initial_data[3] << 
+		" " << initial_data[4] << " " << initial_data[5] << "\n\n";
 	std::cout << "Part 1:  Register[0] = " << initial_data[0] << "\n\n";
 
 	// After analyzing Part Two it noticeable, that it would require 10551319*10551319 iterations of registers 2-10
