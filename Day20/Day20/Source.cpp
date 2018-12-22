@@ -7,11 +7,6 @@ struct Room
 {
 	int x, y;
 	int distance;
-
-	friend std::ostream& operator<<(std::ostream& out, const Room& a) {
-		out << a.x << "," << a.y << " dist: " << a.distance << "\n";
-		return out;
-	}
 };
 
 void get_input_from_file(std::string file_name, std::string&);
