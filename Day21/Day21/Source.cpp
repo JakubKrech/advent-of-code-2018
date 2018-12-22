@@ -67,11 +67,11 @@ int main()
 	}
 
 	// This solution is a result of checking what given input really does to the code.
-	// It writes out all values of register[0] that would stop algorithm.
-	// Essentially only function eqrr was modified. Solution is not optimized at all,
-	// brute forcing through all possible values takes around 97s for Part 2
-	// Also i use ugly global vector to store those values, so ammount of code that i
-	// have to modify from Day19 code is minimal.
+	// It writes out all values of register[0] that would stop algorithm. Essentially only function eqrr was modified.
+	// Solution is not optimized at all, brute forcing through all possible algorithm-stopping-values and
+	// finding values that execute lowest and highest ammount of instructions takes around 97s for Part 2.
+	// Also i use ugly global vector to store those values, so ammount of code that
+	// i have to modify from Day19 code is minimal.
 
 	std::cout << "Part 1: " << results[0] <<
 		"\nPart 2: " << results[results.size() - 1] << "\n";
