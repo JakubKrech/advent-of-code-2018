@@ -3,9 +3,6 @@
 #include <string>
 #include <vector>
 
-#include <chrono>
-#include <thread>
-
 struct Room
 {
 	int x, y;
