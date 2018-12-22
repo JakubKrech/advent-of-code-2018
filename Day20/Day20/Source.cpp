@@ -25,31 +25,26 @@ int main()
 	std::string input;
 	std::vector<Room> rooms;
 
-	get_input_from_file("input_test.txt", input);
-
-	std::cout << input << "\n\n";
-	std::cout << "Input size: " << input.length() << "\n\n";
+	get_input_from_file("input.txt", input);
 
 	int start_x = 0;
 	int start_y = 0;
 	int counter = 0;
-	int input_counter = 0;
-	find_room(input, rooms, start_x, start_y, counter, input_counter);
+	int input_iterator = 0;
+	find_room(input, rooms, start_x, start_y, counter, input_iterator);
 	
 	int max_dist = 0;
-	int max_x, max_y;
-	for (auto x : rooms)
+	int distance_over_1000 = 0;
+	
+	for (auto x : rooms) {
 		if (x.distance > max_dist) {
 			max_dist = x.distance;
-			max_x = x.x;
-			max_y = x.y;
 		}
-	std::cout << "\n\nMax dist: " << max_dist << "\n";
-	
-	for (auto x : rooms)
-		if (x.x == max_x && x.y == max_y) {
-			std::cout << x.x << " " << x.y << " " << x.distance << "\n";
-		}
+		if (x.distance >= 1000) distance_over_1000++;
+	}
+
+	std::cout << "Part 1: " << max_dist << "\n";
+	std::cout << "Part 2: " << distance_over_1000 << "\n\n";
 
 	system("pause");
 	return 0;
@@ -68,51 +63,54 @@ void get_input_from_file(std::string file_name, std::string& input)
 	input_file.close();
 }
 
-void find_room(std::string input, std::vector<Room>& rooms, int x, int y, int distance, int& input_counter)
-{
-	//std::cout << "FIND_ROOM x,y:" << x << "," << y << "  input_counter:" << input_counter << "\n";
-		
-	int new_x = x;
-	int new_y = y;
+void find_room(std::string input, std::vector<Room>& rooms, int x, int y, int distance, int& input_iterator)
+{	
+	int init_x = x;
+	int init_y = y;
+	int init_d = distance;
 
-	while (input_counter < input.length()) {
+	while (input_iterator < input.length()) {
 
-		if (input[input_counter] == ')') {
-			input_counter++;
-			continue;
-		}
-		else if (input[input_counter] == '|') {
-			//find_room(input, rooms, new_x, new_y, init_dist, ++input_counter);
-			input_counter++;
+		if (input[input_iterator] == ')') {
+			input_iterator++;
 			break;
 		}
+		else if (input[input_iterator] == '|') {
+			input_iterator++;
+			x = init_x;
+			y = init_y;
+			distance = init_d;
+			continue;
+		}
 
-		if (input[input_counter] == 'N') y++;
-		else if (input[input_counter] == 'E') x++;
-		else if (input[input_counter] == 'S') y--;
-		else if (input[input_counter] == 'W') x--;
+		if (input[input_iterator] == 'N') y++;
+		else if (input[input_iterator] == 'E') x++;
+		else if (input[input_iterator] == 'S') y--;
+		else if (input[input_iterator] == 'W') x--;
 
-		if (input[input_counter] == 'N' || input[input_counter] == 'E' ||
-			input[input_counter] == 'S' || input[input_counter] == 'W') {
+		if (input[input_iterator] == 'N' || input[input_iterator] == 'E' ||
+			input[input_iterator] == 'S' || input[input_iterator] == 'W') {
+			
 			bool already_present = false;
 
-			for (auto z = rooms.begin(); z != rooms.end(); z++) {
-				if (z->x == x && z->y == y) already_present = true;
+			for (auto room = rooms.begin(); room != rooms.end(); room++) {
+				if (room->x == x && room->y == y) already_present = true;
 			}
 
 			if (!already_present) {
 				rooms.push_back({ x, y, ++distance });
-				//std::cout << "   " << rooms[rooms.size() - 1];
 			}
 		}
 
+		int new_x = x;
+		int new_y = y;
 		int init_dist = distance;
 
-		if (input[input_counter] == '(') {
-			find_room(input, rooms, x, y, init_dist, ++input_counter);
+		if (input[input_iterator] == '(') {
+			find_room(input, rooms, new_x, new_y, init_dist, ++input_iterator);
 		}	
 		else {
-			input_counter++;
+			input_iterator++;
 		}
 	}
 }
