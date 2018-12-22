@@ -23,3 +23,4 @@ The aim for the solutions is to be reasonably efficient and easily readable. Mos
 - **Day 17: [Reservoir Research](Day17/Day17/Source.cpp)**
 - **Day 18: [Settlers of The North Pole](Day18/Day18/Source.cpp)**
 - **Day 19: [Go With The Flow](Day19/Day19/Source.cpp)**
+- **Day 20: [A Regular Map](Day20/Day20/Source.cpp)**
